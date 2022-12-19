@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="AssocActions.aspx" />
     <Content Include="AssocRegister.aspx" />
+    <Content Include="FanRegister.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +86,13 @@
     </Compile>
     <Compile Include="AssocRegister.aspx.designer.cs">
       <DependentUpon>AssocRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FanRegister.aspx.cs">
+      <DependentUpon>FanRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FanRegister.aspx.designer.cs">
+      <DependentUpon>FanRegister.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

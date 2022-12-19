@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form class="form" id="assocRegForm" runat="server">
         <asp:Label ID="Label1" runat="server" Text="Please Register"></asp:Label>
        <p>
                    <asp:Label ID="Label2" runat="server" Text="Name:"></asp:Label>
