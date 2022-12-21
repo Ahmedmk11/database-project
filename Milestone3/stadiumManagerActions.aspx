@@ -15,8 +15,10 @@
                     <asp:Label runat="server" Text="Host Club"></asp:Label>
                     <asp:TextBox ID="host" runat="server"></asp:TextBox>
                 </div>
+                <div class="labelClass">
                     <asp:Label runat="server" Text="Guest Club"></asp:Label>
                     <asp:TextBox ID="guest" runat="server"></asp:TextBox>
+                </div>
                 <div class="labelClass">
                     <asp:Label runat="server" Text="Start Time"></asp:Label>
                     <asp:TextBox ID="starttime" runat="server"></asp:TextBox>
