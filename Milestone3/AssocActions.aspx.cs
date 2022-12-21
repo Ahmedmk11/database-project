@@ -31,42 +31,49 @@ namespace Milestone3
 
             conn.Open();
 
+            HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
+            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
 
-            SqlCommand nev = new SqlCommand("SELECT * FROM clubsNeverMatched", conn);
-            nev.CommandType = CommandType.Text;
-            SqlDataReader rdr = nev.ExecuteReader();
-            HtmlGenericControl divHost = new HtmlGenericControl("div");
-            HtmlGenericControl divGuest = new HtmlGenericControl("div");
-            HtmlGenericControl hostguestContainer = new HtmlGenericControl("div");
+            HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
 
             hostSpan.InnerText = "Host";
             guestSpan.InnerText = "Guest";
 
-            divHost.Controls.Add(hostSpan);
-            divGuest.Controls.Add(guestSpan);
+            titlesRow.Controls.Add(hostSpan);
+            titlesRow.Controls.Add(guestSpan);
 
-            hostguestContainer.Controls.Add(divHost);
-            hostguestContainer.Controls.Add(divGuest);
-            clubsNeverMatchedContainer.Controls.Add(hostguestContainer);
+            rowsContainer.Controls.Add(titlesRow);
 
+            SqlCommand upcom = new SqlCommand("SELECT * FROM clubsNeverMatched", conn);
+
+            upcom.CommandType = CommandType.Text;
+            SqlDataReader rdr = upcom.ExecuteReader();
             while (rdr.Read())
             {
+                HtmlGenericControl tmp = new HtmlGenericControl("div");
+
                 String host = rdr.GetString(rdr.GetOrdinal("Host"));
-                Label h = new Label();
-                h.Text = host;
                 String guest = rdr.GetString(rdr.GetOrdinal("Guest"));
-                Label g = new Label();
-                g.Text = guest;
-                divHost.Controls.Add(h);
-                divGuest.Controls.Add(g);
+             
+                HtmlGenericControl h = new HtmlGenericControl("div");
+                HtmlGenericControl g = new HtmlGenericControl("div");
+
+                h.InnerText = host;
+                g.InnerText = guest;
+
+                tmp.Controls.Add(h);
+                tmp.Controls.Add(g);
+
+                rowsContainer.Controls.Add(tmp);
             }
 
+            clubsNeverMatchedContainer.Controls.Add(rowsContainer);
+
             rdr.Close();
-            nev.ExecuteNonQuery();
+            upcom.ExecuteNonQuery();
             conn.Close();
         }
         protected void viewUpMatch(object sender, EventArgs e)
@@ -77,41 +84,63 @@ namespace Milestone3
 
             conn.Open();
 
+            HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl divHost = new HtmlGenericControl("div");
-            HtmlGenericControl divGuest = new HtmlGenericControl("div");
-            HtmlGenericControl hostguestContainer = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
+
 
             hostSpan.InnerText = "Host";
             guestSpan.InnerText = "Guest";
+            startTimeSpan.InnerText = "Start Time";
+            endTimeSpan.InnerText = "End Time";
 
-            divHost.Controls.Add(hostSpan);
-            divGuest.Controls.Add(guestSpan);
+            titlesRow.Controls.Add(hostSpan);
+            titlesRow.Controls.Add(guestSpan);
+            titlesRow.Controls.Add(startTimeSpan);
+            titlesRow.Controls.Add(endTimeSpan);
 
-            hostguestContainer.Controls.Add(divHost);
-            hostguestContainer.Controls.Add(divGuest);
-            upcomingMatchesContainer.Controls.Add(hostguestContainer);
+            rowsContainer.Controls.Add(titlesRow);
 
-            SqlCommand upcom = new SqlCommand("SELECT * FROM allMatches WHERE start_time < CURRENT_TIMESTAMP", conn);
+            SqlCommand upcom = new SqlCommand("SELECT hc.name AS 'Host Club', gc.name AS 'Guest Club', m.start_time, m.end_time\r\nFROM Club hc INNER JOIN Match m\r\nON hc.club_id = m.host_club_id\r\nINNER JOIN Club gc\r\nON gc.club_id = m.guest_club_id\r\nWHERE m.start_time > CURRENT_TIMESTAMP", conn);
 
             upcom.CommandType = CommandType.Text;
             SqlDataReader rdr = upcom.ExecuteReader();
             while (rdr.Read())
             {
+
+                HtmlGenericControl tmp = new HtmlGenericControl("div");
+
                 String host = rdr.GetString(rdr.GetOrdinal("Host Club"));
                 String guest = rdr.GetString(rdr.GetOrdinal("Guest Club"));
-                Label h = new Label();
-                h.Text = host;
-                Label g = new Label();
-                g.Text = guest;
+                DateTime dt = rdr.GetDateTime(2);
+                String start = dt.ToString("yyyy-MM-dd HH:mm:ss");
+                DateTime dt2 = rdr.GetDateTime(3);
+                String end = dt2.ToString("yyyy-MM-dd HH:mm:ss");
 
-                divHost.Controls.Add(h);
-                divGuest.Controls.Add(g);
+                HtmlGenericControl h = new HtmlGenericControl("div");
+                HtmlGenericControl g = new HtmlGenericControl("div");
+                HtmlGenericControl st = new HtmlGenericControl("div");
+                HtmlGenericControl et = new HtmlGenericControl("div");
 
+                h.InnerText = host;
+                g.InnerText = guest;
+                st.InnerText = start;
+                et.InnerText = end;
+
+                tmp.Controls.Add(h);
+                tmp.Controls.Add(g);
+                tmp.Controls.Add(st);
+                tmp.Controls.Add(et);
+
+                rowsContainer.Controls.Add(tmp);
             }
+
+            upcomingMatchesContainer.Controls.Add(rowsContainer);
 
             rdr.Close();
             upcom.ExecuteNonQuery();
@@ -126,41 +155,63 @@ namespace Milestone3
 
             conn.Open();
 
+            HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl divHost = new HtmlGenericControl("div");
-            HtmlGenericControl divGuest = new HtmlGenericControl("div");
-            HtmlGenericControl hostguestContainer = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
+
 
             hostSpan.InnerText = "Host";
             guestSpan.InnerText = "Guest";
+            startTimeSpan.InnerText = "Start Time";
+            endTimeSpan.InnerText = "End Time";
 
-            divHost.Controls.Add(hostSpan);
-            divGuest.Controls.Add(guestSpan);
+            titlesRow.Controls.Add(hostSpan);
+            titlesRow.Controls.Add(guestSpan);
+            titlesRow.Controls.Add(startTimeSpan);
+            titlesRow.Controls.Add(endTimeSpan);
 
-            hostguestContainer.Controls.Add(divHost);
-            hostguestContainer.Controls.Add(divGuest);
-            playedMatchesContainer.Controls.Add(hostguestContainer);
+            rowsContainer.Controls.Add(titlesRow);
 
-            SqlCommand upcom = new SqlCommand("SELECT * FROM allMatches WHERE start_time > CURRENT_TIMESTAMP", conn);
+            SqlCommand upcom = new SqlCommand("SELECT hc.name AS 'Host Club', gc.name AS 'Guest Club', m.start_time, m.end_time\r\nFROM Club hc INNER JOIN Match m\r\nON hc.club_id = m.host_club_id\r\nINNER JOIN Club gc\r\nON gc.club_id = m.guest_club_id\r\nWHERE m.start_time < CURRENT_TIMESTAMP", conn);
 
             upcom.CommandType = CommandType.Text;
             SqlDataReader rdr = upcom.ExecuteReader();
             while (rdr.Read())
             {
+
+                HtmlGenericControl tmp = new HtmlGenericControl("div");
+
                 String host = rdr.GetString(rdr.GetOrdinal("Host Club"));
                 String guest = rdr.GetString(rdr.GetOrdinal("Guest Club"));
-                Label h = new Label();
-                h.Text = host;
-                Label g = new Label();
-                g.Text = guest;
+                DateTime dt = rdr.GetDateTime(2);
+                String start = dt.ToString("yyyy-MM-dd HH:mm:ss");
+                DateTime dt2 = rdr.GetDateTime(3);
+                String end = dt2.ToString("yyyy-MM-dd HH:mm:ss");
 
+                HtmlGenericControl h = new HtmlGenericControl("div");
+                HtmlGenericControl g = new HtmlGenericControl("div");
+                HtmlGenericControl st = new HtmlGenericControl("div");
+                HtmlGenericControl et = new HtmlGenericControl("div");
 
-                divHost.Controls.Add(h);
-                divGuest.Controls.Add(g);
+                h.InnerText = host;
+                g.InnerText = guest;
+                st.InnerText = start;
+                et.InnerText = end;
+
+                tmp.Controls.Add(h);
+                tmp.Controls.Add(g);
+                tmp.Controls.Add(st);
+                tmp.Controls.Add(et);
+
+                rowsContainer.Controls.Add(tmp);
             }
+
+            playedMatchesContainer.Controls.Add(rowsContainer);
 
             rdr.Close();
             upcom.ExecuteNonQuery();

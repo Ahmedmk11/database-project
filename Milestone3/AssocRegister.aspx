@@ -29,7 +29,7 @@
 
        </p>
         <p>
-        <asp:TextBox ID="password" runat="server" Text=""></asp:TextBox>
+        <asp:TextBox ID="password" TextMode="Password" runat="server" Text=""></asp:TextBox>
         </p>
         <asp:Button ID="Button1" runat="server" Text="register" OnClick="register" />
     </form>
