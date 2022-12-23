@@ -20,6 +20,11 @@ namespace Milestone3
         {
 
         }
+
+        protected void logOut(object sender, EventArgs e)
+        {
+            Response.Redirect("start.aspx");
+        }
         protected void clubInfo(object sender, EventArgs e)
         {
             String conStr = WebConfigurationManager.ConnectionStrings["Sports"].ToString();

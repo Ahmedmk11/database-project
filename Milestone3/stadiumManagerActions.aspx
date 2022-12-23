@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="stadiumManagerActionsBody" runat="server">
+        <asp:Button ID="logoutSMA" CssClass="btn" runat="server" Text="Sign Out" OnClick="logOut" />
         <div class="form">
                 <asp:Label runat="server" Text="Accept/Reject Host Request"></asp:Label>
                 <div class="labelClass">

@@ -43,8 +43,10 @@ namespace Milestone3
             addRep.ExecuteNonQuery();
             conn.Close();
 
-            Response.Redirect("clubRepActions.aspx");
+            Response.Redirect("ClubRepresentativeLogin.aspx");
 
         }
+
+        
     }
 }

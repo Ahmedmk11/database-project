@@ -1,11 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loginPage.aspx.cs" Inherits="Milestone3.loginPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SystemAdminLogin.aspx.cs" Inherits="Milestone3.SystemAdminLogin" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Login</title>
+    <title></title>
 </head>
 <body>
     <form id="loginPageBody" runat="server">
@@ -19,7 +18,7 @@
                     <asp:Label runat="server" Text="Password"></asp:Label>
                     <asp:TextBox ID="loginPassword" TextMode="Password" runat="server"></asp:TextBox>
                 </div>
-                <asp:Button CssClass="btn" runat="server" Text="Login" OnClick="login"/>
+                <asp:Button CssClass="btn" runat="server" Text="Login" OnClick="loginSystemAdmin"/>
             </div>
     </form>
 </body>

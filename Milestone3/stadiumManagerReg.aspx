@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="stadiumManagerReg.aspx.cs" Inherits="Milestone3.stadiumManagerReg" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StadiumManagerReg.aspx.cs" Inherits="Milestone3.stadiumManagerReg" %>
 
 <!DOCTYPE html>
 

@@ -45,7 +45,7 @@ namespace Milestone3
             addMan.ExecuteNonQuery();
             conn.Close();
 
-            Response.Redirect("stadiumManagerActions.aspx");
+            Response.Redirect("StadiumManagerLogin.aspx");
 
         }
 

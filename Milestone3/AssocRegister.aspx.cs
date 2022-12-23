@@ -39,7 +39,7 @@ namespace Milestone3
             addAssoc.ExecuteNonQuery();
             conn.Close();
 
-            //Response.Redirect("AssocActions.aspx");
+            Response.Redirect("AssocLogin.aspx");
 
         }
 

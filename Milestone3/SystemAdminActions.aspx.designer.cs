@@ -11,70 +11,97 @@ namespace Milestone3
 {
 
 
-    public partial class stadiumManagerActions
+    public partial class SystemAdminActions
     {
 
         /// <summary>
-        /// stadiumManagerActionsBody control.
+        /// systemAdminActionsBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm stadiumManagerActionsBody;
+        protected global::System.Web.UI.HtmlControls.HtmlForm systemAdminActionsBody;
 
         /// <summary>
-        /// logoutSMA control.
+        /// logoutSAA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button logoutSMA;
+        protected global::System.Web.UI.WebControls.Button logoutSAA;
 
         /// <summary>
-        /// host control.
+        /// nameClub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox host;
+        protected global::System.Web.UI.WebControls.TextBox nameClub;
 
         /// <summary>
-        /// guest control.
+        /// locClub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox guest;
+        protected global::System.Web.UI.WebControls.TextBox locClub;
 
         /// <summary>
-        /// starttime control.
+        /// nameClubDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox starttime;
+        protected global::System.Web.UI.WebControls.TextBox nameClubDelete;
 
         /// <summary>
-        /// stadiumInfoContainer control.
+        /// stadiumNameAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl stadiumInfoContainer;
+        protected global::System.Web.UI.WebControls.TextBox stadiumNameAdd;
 
         /// <summary>
-        /// requestsReceivedContainer control.
+        /// stadiumLocAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl requestsReceivedContainer;
+        protected global::System.Web.UI.WebControls.TextBox stadiumLocAdd;
+
+        /// <summary>
+        /// stadiumCapAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox stadiumCapAdd;
+
+        /// <summary>
+        /// stadiumNameDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox stadiumNameDelete;
+
+        /// <summary>
+        /// blockFanNat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox blockFanNat;
     }
 }

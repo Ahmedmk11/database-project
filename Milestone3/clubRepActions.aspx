@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="clubRepActions" runat="server">
+        <asp:Button ID="logoutCRA" CssClass="btn" runat="server" Text="Sign Out" OnClick="logOut" />
         <div id="clubInfoContainer" class="view" runat="server">
             <asp:Button ID="Button1repAct" CssClass="btn" runat="server" Text="View Matches" OnClick="clubInfo" />
         </div>

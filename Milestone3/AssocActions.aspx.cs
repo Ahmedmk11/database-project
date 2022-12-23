@@ -19,9 +19,32 @@ namespace Milestone3
 
         }
 
+        protected void logOut(object sender, EventArgs e)
+        {
+            Response.Redirect("start.aspx");
+        }
+
         protected void deleteMatch(object sender, EventArgs e)
         {
+            String conStr = WebConfigurationManager.ConnectionStrings["Sports"].ToString();
 
+            SqlConnection conn = new SqlConnection(conStr);
+
+            conn.Open();
+
+            String h = host.Text;
+            String g = guest.Text;
+            String st = starttime.Text;
+            String et = endtime.Text;
+
+            SqlCommand addNewMatch = new SqlCommand("deleteMatch", conn);
+            addNewMatch.CommandType = CommandType.StoredProcedure;
+            addNewMatch.Parameters.Add(new SqlParameter("@first_club", h));
+            addNewMatch.Parameters.Add(new SqlParameter("@second_club", g));
+
+
+            addNewMatch.ExecuteNonQuery();
+            conn.Close();
         }
         protected void viewClubsNeverMatched(object sender, EventArgs e)
         {

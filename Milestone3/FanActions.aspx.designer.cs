@@ -11,70 +11,70 @@ namespace Milestone3
 {
 
 
-    public partial class stadiumManagerActions
+    public partial class fan
     {
 
         /// <summary>
-        /// stadiumManagerActionsBody control.
+        /// fanActionContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm stadiumManagerActionsBody;
+        protected global::System.Web.UI.HtmlControls.HtmlForm fanActionContainer;
 
         /// <summary>
-        /// logoutSMA control.
+        /// logoutFA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button logoutSMA;
+        protected global::System.Web.UI.WebControls.Button logoutFA;
 
         /// <summary>
-        /// host control.
+        /// hostFan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox host;
+        protected global::System.Web.UI.WebControls.TextBox hostFan;
 
         /// <summary>
-        /// guest control.
+        /// guestFan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox guest;
+        protected global::System.Web.UI.WebControls.TextBox guestFan;
 
         /// <summary>
-        /// starttime control.
+        /// AvailableTicketsContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox starttime;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AvailableTicketsContainer;
 
         /// <summary>
-        /// stadiumInfoContainer control.
+        /// dtF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl stadiumInfoContainer;
+        protected global::System.Web.UI.WebControls.TextBox dtF;
 
         /// <summary>
-        /// requestsReceivedContainer control.
+        /// Button1F control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl requestsReceivedContainer;
+        protected global::System.Web.UI.WebControls.Button Button1F;
     }
 }

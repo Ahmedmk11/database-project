@@ -7,14 +7,17 @@
     </head>
     <body>
         <form id="assocActionBody" runat="server">
+            <asp:Button ID="logoutAA" CssClass="btn" runat="server" Text="Sign Out" OnClick="logOut" />
             <div class="form">
                 <asp:Label ID="Label1" runat="server" Text="To add a new match"></asp:Label>
                 <div class="labelClass">
                     <asp:Label ID="Label2" runat="server" Text="Host Club "></asp:Label>
                     <asp:TextBox ID="host" runat="server"></asp:TextBox>
                 </div>
+                <div>
                     <asp:Label ID="Label3" runat="server" Text="Guest Club "></asp:Label>
                     <asp:TextBox ID="guest" runat="server"></asp:TextBox>
+                </div>
                 <div class="labelClass">
                     <asp:Label ID="Label4" runat="server" Text="Starting time "></asp:Label>
                     <asp:TextBox ID="starttime" runat="server"></asp:TextBox>
