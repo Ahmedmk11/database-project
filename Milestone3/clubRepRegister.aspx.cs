@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Milestone3
 {
@@ -31,20 +33,30 @@ namespace Milestone3
             String c = clubNameRep.Text;
 
 
-            SqlCommand addRep = new SqlCommand("addRepresentative", conn);
-            addRep.CommandType = CommandType.StoredProcedure;
-            addRep.Parameters.Add(new SqlParameter("@name", na));
-            addRep.Parameters.Add(new SqlParameter("@username", us));
-            addRep.Parameters.Add(new SqlParameter("@pass", pass));
-            addRep.Parameters.Add(new SqlParameter("@club_name", c));
+            HtmlGenericControl lbl = new HtmlGenericControl("div");
+            lbl.InnerText = "Please enter valid data.";
+            if (na == "" || us == "" || pass == "" || c == "")
+            {
+                crID.Controls.Add(lbl);
+            }
+            else
+            {
+                SqlCommand addRep = new SqlCommand("addRepresentative", conn);
+                addRep.CommandType = CommandType.StoredProcedure;
+                addRep.Parameters.Add(new SqlParameter("@name", na));
+                addRep.Parameters.Add(new SqlParameter("@username", us));
+                addRep.Parameters.Add(new SqlParameter("@pass", pass));
+                addRep.Parameters.Add(new SqlParameter("@club_name", c));
 
-            Session["cr"] = c;
+                Session["cr"] = c;
 
-            addRep.ExecuteNonQuery();
+                addRep.ExecuteNonQuery();
+                Response.Redirect("loginPage.aspx");
+
+
+            }
+
             conn.Close();
-
-            Response.Redirect("ClubRepresentativeLogin.aspx");
-
         }
 
         

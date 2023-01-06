@@ -13,27 +13,27 @@ namespace Milestone3
         {
 
         }
-        protected void chooseSa(object sender, EventArgs e)
-        {
+        //protected void chooseSa(object sender, EventArgs e)
+        //{
             
-            Response.Redirect("SystemAdminLogin.aspx");
+          //  Response.Redirect("SystemAdminLogin.aspx");
             
-        }
+        //}
         protected void chooseSam(object sender, EventArgs e)
         {
-            Response.Redirect("AssocLogin.aspx");
+            Response.Redirect("AssocRegister.aspx");
         }
         protected void chooseSm(object sender, EventArgs e)
         {
-            Response.Redirect("StadiumManagerLogin.aspx");
+            Response.Redirect("StadiumManagerReg.aspx");
         }
         protected void chooseCr(object sender, EventArgs e)
         {
-            Response.Redirect("ClubRepresentativeLogin.aspx");
+            Response.Redirect("clubRepRegister.aspx");
         }
         protected void chooseFan(object sender, EventArgs e)
         {
-            Response.Redirect("FanLogin.aspx");
+            Response.Redirect("FanRegister.aspx");
         }
 
          

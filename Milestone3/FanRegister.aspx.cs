@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Milestone3
 {
@@ -33,38 +35,41 @@ namespace Milestone3
             String bd = fanBirthday.Text;
             String address = fanAddress.Text;
 
-
-            SqlCommand addFan = new SqlCommand("addFan", conn);
-            addFan.CommandType = CommandType.StoredProcedure;
-            addFan.Parameters.Add(new SqlParameter("@name", na));
-            addFan.Parameters.Add(new SqlParameter("@username", us));
-            addFan.Parameters.Add(new SqlParameter("@password", pass));
-            addFan.Parameters.Add(new SqlParameter("@national_id", nat));
-            addFan.Parameters.Add(new SqlParameter("@birthdate", bd));
-            addFan.Parameters.Add(new SqlParameter("@address", address));
-            addFan.Parameters.Add(new SqlParameter("@phone_number", phone));
-
-
-            addFan.ExecuteNonQuery();
-
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT fan_id FROM fan WHERE username = 'x'".Replace("x", us);
-
-            String result = cmd.ExecuteScalar().ToString();
-
-            Session["fan"] = result;
+            HtmlGenericControl lbl = new HtmlGenericControl("div");
+            lbl.InnerText = "Please enter valid data.";
+            if (na == "" || us == "" || pass == "" || nat == "" ||
+                phone == "" || bd == "" || address == "")
+            {
+                fID.Controls.Add(lbl);
+            }
+            else
+            {
+                SqlCommand addFan = new SqlCommand("addFan", conn);
+                addFan.CommandType = CommandType.StoredProcedure;
+                addFan.Parameters.Add(new SqlParameter("@fan_name", na));
+                addFan.Parameters.Add(new SqlParameter("@username", us));
+                addFan.Parameters.Add(new SqlParameter("@password", pass));
+                addFan.Parameters.Add(new SqlParameter("@national_id", nat));
+                addFan.Parameters.Add(new SqlParameter("@birthdate", bd));
+                addFan.Parameters.Add(new SqlParameter("@address", address));
+                addFan.Parameters.Add(new SqlParameter("@phone_number", phone));
 
 
+                addFan.ExecuteNonQuery();
+
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT national_id FROM fan WHERE username = 'x'".Replace("x", us);
+
+                String result = cmd.ExecuteScalar().ToString();
+
+                Session["fan"] = result;
+                Response.Redirect("loginPage.aspx");
+
+            }
             conn.Close();
-
-            //Response.Redirect("AssocActions.aspx");
-
         }
 
-        protected void openRegister(object sender, EventArgs e)
-        {
-            Response.Redirect("FanLogin.aspx");
-        }
+       
     }
 }
 

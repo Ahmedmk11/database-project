@@ -6,7 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Milestone3
 {
@@ -29,18 +31,23 @@ namespace Milestone3
             String us = username.Text;
             String pass = password.Text;
 
-            SqlCommand addAssoc = new SqlCommand("addAssociationManager", conn);
-            addAssoc.CommandType = CommandType.StoredProcedure;
-            addAssoc.Parameters.Add(new SqlParameter("@name", na));
-            addAssoc.Parameters.Add(new SqlParameter("@username", us));
-            addAssoc.Parameters.Add(new SqlParameter("@password", pass));
+            HtmlGenericControl lbl = new HtmlGenericControl("div");
+            lbl.InnerText = "Please enter valid data.";
+            if (na == "" || us == "" || pass == "") {
+                arID.Controls.Add(lbl);
+            }
+            else
+            {
+                SqlCommand addAssoc = new SqlCommand("addAssociationManager", conn);
+                addAssoc.CommandType = CommandType.StoredProcedure;
+                addAssoc.Parameters.Add(new SqlParameter("@name", na));
+                addAssoc.Parameters.Add(new SqlParameter("@username", us));
+                addAssoc.Parameters.Add(new SqlParameter("@password", pass));
+                addAssoc.ExecuteNonQuery();
+                Response.Redirect("loginPage.aspx");
+            }
 
-
-            addAssoc.ExecuteNonQuery();
             conn.Close();
-
-            Response.Redirect("AssocLogin.aspx");
-
         }
 
         

@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 
 namespace Milestone3
@@ -23,7 +24,7 @@ namespace Milestone3
 
         protected void logOut(object sender, EventArgs e)
         {
-            Response.Redirect("start.aspx");
+            Response.Redirect("loginPage.aspx");
         }
         protected void clubInfo(object sender, EventArgs e)
         {
@@ -37,8 +38,8 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -90,11 +91,11 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
-            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl stadNameSpan = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl stadNameSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -114,18 +115,28 @@ namespace Milestone3
             rowsContainer.Controls.Add(titlesRow);
 
             String str = Session["cr"].ToString();
-            String sci = "SELECT c1.name host, c2.name guest, m.start_time, m.end_time, s.name stadiumn FROM Match m INNER JOIN Club C1 ON m.host_club_id = c1.club_id INNER JOIN Club C2 ON m.guest_club_id = c2.club_id INNER JOIN Stadium S ON m.stadium_id = s.sid WHERE m.start_time > CURRENT_TIMESTAMP AND c1.name = '@club_name' UNION SELECT c1.name, c2.name, m.start_time, m.end_time, s.name FROM Match m INNER JOIN Club C1 ON m.host_club_id = c1.club_id  INNER JOIN Club C2 ON m.guest_club_id = c2.club_id INNER JOIN Stadium S ON m.stadium_id = s.sid WHERE m.start_time > CURRENT_TIMESTAMP AND c2.name = '@club_name' AND s.name IS NOT NULL".Replace("@club_name", str);
+            String sci = "SELECT c1.name host, c2.name guest, m.start_time, m.end_time, s.name FROM Match m INNER JOIN Club C1 ON m.host_club_id = c1.club_id INNER JOIN Club C2 ON m.guest_club_id = c2.club_id LEFT OUTER JOIN Stadium s on s.sid = m.stadium_id WHERE m.start_time > CURRENT_TIMESTAMP AND c1.name = 'x' UNION SELECT c1.name, c2.name, m.start_time, m.end_time, s.name FROM Match m INNER JOIN Club C1 ON m.host_club_id = c1.club_id INNER JOIN Club C2 ON m.guest_club_id = c2.club_id LEFT OUTER JOIN Stadium s on s.sid = m.stadium_id WHERE m.start_time > CURRENT_TIMESTAMP AND c2.name = 'x'\r\n".Replace("x", str);
 
             SqlCommand ci = new SqlCommand(sci, conn);
             ci.CommandType = CommandType.Text;
             SqlDataReader rdr = ci.ExecuteReader();
+            //SqlDataReader rdr1 = sti.ExecuteReader();
             while (rdr.Read())
             {
                 HtmlGenericControl tmp = new HtmlGenericControl("div");
 
                 String host = rdr.GetString(rdr.GetOrdinal("host"));
                 String guest = rdr.GetString(rdr.GetOrdinal("guest"));
-                String stadName = rdr.GetString(rdr.GetOrdinal("stadiumn"));
+                String stadName;
+                try
+                {
+                    stadName = rdr.GetString(rdr.GetOrdinal("name"));
+                }
+                catch (System.Data.SqlTypes.SqlNullValueException s)
+                {
+                    stadName = "none";
+                }
+                
                 DateTime dt = rdr.GetDateTime(2);
                 String start = dt.ToString("yyyy-MM-dd HH:mm:ss");
                 DateTime dt2 = rdr.GetDateTime(3);
@@ -151,9 +162,12 @@ namespace Milestone3
 
                 rowsContainer.Controls.Add(tmp);
             }
+            rdr.Close();
+            
+
 
             clubUpcomingContainer.Controls.Add(rowsContainer);
-            rdr.Close();
+            
             ci.ExecuteNonQuery();
             conn.Close();
         }
@@ -169,9 +183,9 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl t1 = new HtmlGenericControl("div");
-            HtmlGenericControl t2 = new HtmlGenericControl("div");
-            HtmlGenericControl t3 = new HtmlGenericControl("div");
+            HtmlGenericControl t1 = new HtmlGenericControl("span");
+            HtmlGenericControl t2 = new HtmlGenericControl("span");
+            HtmlGenericControl t3 = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -187,24 +201,28 @@ namespace Milestone3
             rowsContainer.Controls.Add(titlesRow);
 
             conn.Open();
-            System.Windows.Forms.WebBrowser webBrowser = new WebBrowser();
-            //String regex = @"\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}";
-       
-            String na = webBrowser.Document.GetElementById("dtCRA").InnerText;
-            Console.WriteLine(na);
-            //var match = Regex.Match(na, regex);
+            
+            String na = dtCRA.Text;
 
-            if (na == "2019/01/01 09:00:00") {
-                SqlCommand availS = new SqlCommand("SELECT * FROM dbo.viewAvailableStadiumsOn('x')".Replace("x", na), conn);
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
+
+            if (na == "" )
+            {
+                cre.Controls.Add(lbl1);
+            }
+            else
+            {
+                SqlCommand availS = new SqlCommand("SELECT s.name, s.location, s.capacity FROM Stadium s EXCEPT(SELECT s.name, s.location, s.capacity    FROM Stadium s       inner JOIN match m ON (s.sid = m.stadium_id)   WHERE s.status = 1 AND (m.start_time = 'x'))\r\n".Replace("x", na), conn);
                 availS.CommandType = CommandType.Text;
                 SqlDataReader rdr = availS.ExecuteReader();
                 while (rdr.Read())
                 {
-                    HtmlGenericControl tmp =  new HtmlGenericControl("div");
+                    HtmlGenericControl tmp = new HtmlGenericControl("div");
 
                     String name = rdr.GetString(rdr.GetOrdinal("name"));
                     String location = rdr.GetString(rdr.GetOrdinal("location"));
-                    String cap = rdr.GetString(rdr.GetOrdinal("capacity"));
+                    String cap = rdr.GetInt32(rdr.GetOrdinal("capacity")).ToString();
 
                     HtmlGenericControl n = new HtmlGenericControl("div");
                     HtmlGenericControl l = new HtmlGenericControl("div");
@@ -219,13 +237,53 @@ namespace Milestone3
                     tmp.Controls.Add(c);
 
                     rowsContainer.Controls.Add(tmp);
-                    
+
                 }
                 AvailableStadiumsContainer.Controls.Add(rowsContainer);
                 rdr.Close();
                 availS.ExecuteNonQuery();
             }
+            
             conn.Close();
+        }
+
+        protected void addReq(object sender, EventArgs e)
+        {
+            String conStr = WebConfigurationManager.ConnectionStrings["Sports"].ToString();
+
+            SqlConnection conn = new SqlConnection(conStr);
+
+            conn.Open();
+            // String viewava= "(@X DATETIME) Returns @temp TABLE ( name varchar(20), location varchar(20), capacity varchar(20) ) AS Begin INSERT INTO @temp SELECT s.name, s.location, s.capacity FROM Stadium s LEFT OUTER JOIN match m ON (s.sid = m.stadium_id) WHERE s.status = 1 AND (m.stadium_id IS NULL OR m.start_time <> @X)".Replace("@X", Session[us]);
+            String ho = Session["cr"].ToString();
+            String sn = snCRA.Text;
+            String d = stCRA.Text;
+
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
+            if (sn == "" || d == "")
+            {
+                craCLR.Controls.Add(lbl1);
+            }
+            else
+            {
+                SqlCommand hostReq = new SqlCommand("addHostRequest", conn);
+
+
+                hostReq.CommandType = CommandType.StoredProcedure;
+                hostReq.Parameters.Add(new SqlParameter("@club_name", ho));
+                hostReq.Parameters.Add(new SqlParameter("@stadium_name", sn));
+                hostReq.Parameters.Add(new SqlParameter("@start_time", d));
+
+                loginPage.EmptyTextBoxes(craCLR);
+
+
+                hostReq.ExecuteNonQuery();
+            }
+            conn.Close();
+
+            //Response.Redirect("AssocActions.aspx");
+
         }
     }
 }

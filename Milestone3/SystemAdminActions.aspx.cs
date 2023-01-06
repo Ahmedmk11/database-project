@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 namespace Milestone3
 {
@@ -19,7 +20,7 @@ namespace Milestone3
 
         protected void logOut(object sender, EventArgs e)
         {
-            Response.Redirect("start.aspx");
+            Response.Redirect("loginPage.aspx");
         }
 
         protected void addClub(object sender, EventArgs e)
@@ -33,15 +34,25 @@ namespace Milestone3
             String na = nameClub.Text;
             String loc = locClub.Text;
 
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            SqlCommand addC = new SqlCommand("addClub", conn);
-            addC.CommandType = CommandType.StoredProcedure;
-            addC.Parameters.Add(new SqlParameter("@name", na));
-            addC.Parameters.Add(new SqlParameter("@location", loc));
+            if (na == "" || loc == "")
+            {
+                g1.Controls.Add(lbl1);
+            }
+            else
+            {
+                SqlCommand addC = new SqlCommand("addClub", conn);
+                addC.CommandType = CommandType.StoredProcedure;
+                addC.Parameters.Add(new SqlParameter("@name", na));
+                addC.Parameters.Add(new SqlParameter("@location", loc));
+                addC.ExecuteNonQuery();
 
+                loginPage.EmptyTextBoxes(g1);
 
+            }
 
-            addC.ExecuteNonQuery();
             conn.Close();
         }
 
@@ -55,13 +66,25 @@ namespace Milestone3
 
             String na = nameClubDelete.Text;
 
-            SqlCommand delC = new SqlCommand("deleteClub", conn);
-            delC.CommandType = CommandType.StoredProcedure;
-            delC.Parameters.Add(new SqlParameter("@name", na));
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
+
+            if (na == "")
+            {
+                g2.Controls.Add(lbl1);
+            }
+            else
+            {
+
+                SqlCommand delC = new SqlCommand("deleteClub", conn);
+                delC.CommandType = CommandType.StoredProcedure;
+                delC.Parameters.Add(new SqlParameter("@name", na));
 
 
+                loginPage.EmptyTextBoxes(g2);
 
-            delC.ExecuteNonQuery();
+                delC.ExecuteNonQuery();
+            }
             conn.Close();
         }
 
@@ -78,15 +101,26 @@ namespace Milestone3
             String loc = stadiumLocAdd.Text;
             String cap = stadiumCapAdd.Text;
 
-            SqlCommand addS = new SqlCommand("addStadium", conn);
-            addS.CommandType = CommandType.StoredProcedure;
-            addS.Parameters.Add(new SqlParameter("@name", na));
-            addS.Parameters.Add(new SqlParameter("@location", loc));
-            addS.Parameters.Add(new SqlParameter("@capacity", cap));
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
+            if (na == "" || loc == "" || cap == "")
+            {
+                g3.Controls.Add(lbl1);
+            }
+            else
+            {
 
+                SqlCommand addS = new SqlCommand("addStadium", conn);
+                addS.CommandType = CommandType.StoredProcedure;
+                addS.Parameters.Add(new SqlParameter("@name", na));
+                addS.Parameters.Add(new SqlParameter("@location", loc));
+                addS.Parameters.Add(new SqlParameter("@capacity", cap));
 
-            addS.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(g3);
+
+                addS.ExecuteNonQuery();
+            }
             conn.Close();
         }
 
@@ -100,14 +134,24 @@ namespace Milestone3
 
             String na = stadiumNameDelete.Text;
 
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            SqlCommand delS = new SqlCommand("deleteStadium", conn);
-            delS.CommandType = CommandType.StoredProcedure;
-            delS.Parameters.Add(new SqlParameter("@name", na));
+            if (na == "")
+            {
+                g4.Controls.Add(lbl1);
+            }
+            else
+            {
+
+                SqlCommand delS = new SqlCommand("deleteStadium", conn);
+                delS.CommandType = CommandType.StoredProcedure;
+                delS.Parameters.Add(new SqlParameter("@name", na));
 
 
-
-            delS.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(g4);
+                delS.ExecuteNonQuery();
+            }
             conn.Close();
         }
 
@@ -121,14 +165,25 @@ namespace Milestone3
 
             String nat = blockFanNat.Text;
 
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            SqlCommand bf = new SqlCommand("blockFan", conn);
-            bf.CommandType = CommandType.StoredProcedure;
-            bf.Parameters.Add(new SqlParameter("@nat_id", nat));
+            if (nat == "")
+            {
+                g5.Controls.Add(lbl1);
+            }
+            else
+            {
 
 
+                SqlCommand bf = new SqlCommand("blockFan", conn);
+                bf.CommandType = CommandType.StoredProcedure;
+                bf.Parameters.Add(new SqlParameter("@nat_id", nat));
 
-            bf.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(g5);
+
+                bf.ExecuteNonQuery();
+            }
             conn.Close();
         }
     }

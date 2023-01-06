@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using System.Web.UI.HtmlControls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Milestone3
 {
@@ -21,7 +22,7 @@ namespace Milestone3
 
         protected void logOut(object sender, EventArgs e)
         {
-            Response.Redirect("start.aspx");
+            Response.Redirect("loginPage.aspx");
         }
 
         protected void deleteMatch(object sender, EventArgs e)
@@ -37,13 +38,26 @@ namespace Milestone3
             String st = starttime.Text;
             String et = endtime.Text;
 
-            SqlCommand addNewMatch = new SqlCommand("deleteMatch", conn);
-            addNewMatch.CommandType = CommandType.StoredProcedure;
-            addNewMatch.Parameters.Add(new SqlParameter("@first_club", h));
-            addNewMatch.Parameters.Add(new SqlParameter("@second_club", g));
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
+            if (h == "" || g == "" || st == "" || et == "")
+            {
+                aae.Controls.Add(lbl1);
+            }
+            else
+            {
+                SqlCommand addNewMatch = new SqlCommand("deleteMatch", conn);
+                addNewMatch.CommandType = CommandType.StoredProcedure;
+                addNewMatch.Parameters.Add(new SqlParameter("@first_club", h));
+                addNewMatch.Parameters.Add(new SqlParameter("@second_club", g));
 
-            addNewMatch.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(aae);
+
+                addNewMatch.ExecuteNonQuery();
+            }
+
+                
             conn.Close();
         }
         protected void viewClubsNeverMatched(object sender, EventArgs e)
@@ -56,8 +70,8 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -109,10 +123,10 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
-            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -180,10 +194,10 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
-            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -254,14 +268,27 @@ namespace Milestone3
             String st = starttime.Text;
             String et = endtime.Text;
 
-            SqlCommand addNewMatch = new SqlCommand("addNewMatch", conn);
-            addNewMatch.CommandType = CommandType.StoredProcedure;
-            addNewMatch.Parameters.Add(new SqlParameter("@first_club", h));
-            addNewMatch.Parameters.Add(new SqlParameter("@second_club", g));
-            addNewMatch.Parameters.Add(new SqlParameter("@start_time", st));
-            addNewMatch.Parameters.Add(new SqlParameter("@end_time", et));
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            addNewMatch.ExecuteNonQuery();
+            if (h == "" || g == "" || st == "" || et == "")
+            {
+                aae.Controls.Add(lbl1);
+            }
+            else
+            {
+
+                SqlCommand addNewMatch = new SqlCommand("addNewMatch", conn);
+                addNewMatch.CommandType = CommandType.StoredProcedure;
+                addNewMatch.Parameters.Add(new SqlParameter("@first_club", h));
+                addNewMatch.Parameters.Add(new SqlParameter("@second_club", g));
+                addNewMatch.Parameters.Add(new SqlParameter("@start_time", st));
+                addNewMatch.Parameters.Add(new SqlParameter("@end_time", et));
+
+                loginPage.EmptyTextBoxes(aae);
+
+                addNewMatch.ExecuteNonQuery();
+            }
             conn.Close();
         }
     }

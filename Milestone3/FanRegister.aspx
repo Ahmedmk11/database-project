@@ -3,19 +3,19 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title></title>
-</head>
-<body>
-    <form id="fanRegisterBody" runat="server">
-        <div class="form">
-                <asp:Label runat="server" Text="Register as a Fan"></asp:Label>
+    <head runat="server">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <title>Register</title>
+    </head>
+    <body>
+        <form id="fanRegisterBody" runat="server">
+            <div id="fID" runat="server" class="form">
+                <asp:Label CssClass="labels" runat="server" Text="Register"></asp:Label>
                 <div class="labelClass">
                     <asp:Label runat="server" Text="Name"></asp:Label>
                     <asp:TextBox ID="fanName" runat="server"></asp:TextBox>
                 </div>
-                <div>
+                <div class="labelClass">
                     <asp:Label runat="server" Text="Username"></asp:Label>
                     <asp:TextBox ID="fanUsername" runat="server"></asp:TextBox>
                 </div>
@@ -39,8 +39,8 @@
                     <asp:Label runat="server" Text="Address"></asp:Label>
                     <asp:TextBox ID="fanAddress" runat="server"></asp:TextBox>
                 </div>
-                    <asp:Button ID="registerFann" CssClass="btn" runat="server" Text="Register" OnClick="registerFan" />
-                </div>
-    </form>
-</body>
+                <asp:Button ID="registerFann" CssClass="btn" runat="server" Text="Register" OnClick="registerFan" />
+            </div>
+        </form>
+    </body>
 </html>

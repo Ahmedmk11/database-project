@@ -24,6 +24,24 @@ namespace Milestone3
         protected global::System.Web.UI.HtmlControls.HtmlForm loginPageBody;
 
         /// <summary>
+        /// lpID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lpID;
+
+        /// <summary>
+        /// loginFailed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl loginFailed;
+
+        /// <summary>
         /// loginUsername control.
         /// </summary>
         /// <remarks>

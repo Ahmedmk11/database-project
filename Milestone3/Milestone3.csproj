@@ -75,18 +75,13 @@
     <Content Include="AssocRegister.aspx" />
     <Content Include="clubRepActions.aspx" />
     <Content Include="clubRepRegister.aspx" />
-    <Content Include="ClubRepresentativeLogin.aspx" />
     <Content Include="FanActions.aspx" />
-    <Content Include="FanLogin.aspx" />
     <Content Include="FanRegister.aspx" />
     <Content Include="loginPage.aspx" />
-    <Content Include="AssocLogin.aspx" />
     <Content Include="stadiumManagerActions.aspx" />
-    <Content Include="StadiumManagerLogin.aspx" />
     <Content Include="StadiumManagerReg.aspx" />
     <Content Include="start.aspx" />
     <Content Include="SystemAdminActions.aspx" />
-    <Content Include="SystemAdminLogin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -118,26 +113,12 @@
     <Compile Include="clubRepRegister.aspx.designer.cs">
       <DependentUpon>clubRepRegister.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClubRepresentativeLogin.aspx.cs">
-      <DependentUpon>ClubRepresentativeLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ClubRepresentativeLogin.aspx.designer.cs">
-      <DependentUpon>ClubRepresentativeLogin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="FanActions.aspx.cs">
       <DependentUpon>FanActions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FanActions.aspx.designer.cs">
       <DependentUpon>FanActions.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FanLogin.aspx.cs">
-      <DependentUpon>FanLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FanLogin.aspx.designer.cs">
-      <DependentUpon>FanLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="FanRegister.aspx.cs">
       <DependentUpon>FanRegister.aspx</DependentUpon>
@@ -154,26 +135,12 @@
       <DependentUpon>loginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AssocLogin.aspx.cs">
-      <DependentUpon>AssocLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AssocLogin.aspx.designer.cs">
-      <DependentUpon>AssocLogin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="stadiumManagerActions.aspx.cs">
       <DependentUpon>stadiumManagerActions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="stadiumManagerActions.aspx.designer.cs">
       <DependentUpon>stadiumManagerActions.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StadiumManagerLogin.aspx.cs">
-      <DependentUpon>StadiumManagerLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StadiumManagerLogin.aspx.designer.cs">
-      <DependentUpon>StadiumManagerLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="StadiumManagerReg.aspx.cs">
       <DependentUpon>StadiumManagerReg.aspx</DependentUpon>
@@ -195,13 +162,6 @@
     </Compile>
     <Compile Include="SystemAdminActions.aspx.designer.cs">
       <DependentUpon>SystemAdminActions.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemAdminLogin.aspx.cs">
-      <DependentUpon>SystemAdminLogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemAdminLogin.aspx.designer.cs">
-      <DependentUpon>SystemAdminLogin.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

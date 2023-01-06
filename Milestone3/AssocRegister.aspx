@@ -3,35 +3,31 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form class="form" id="assocRegForm" runat="server">
-        <asp:Label ID="Label1" runat="server" Text="Please Register"></asp:Label>
-       <p>
-                   <asp:Label ID="Label2" runat="server" Text="Name:"></asp:Label>
+    <head runat="server">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <title>Register</title>
+    </head>
+    <body>
+        <form id="assocRegForm" runat="server">
+            <div id="arID" runat="server" class="form registerFrm">
+                <asp:Label CssClass="labels" ID="Label1" runat="server" Text="Register"></asp:Label>
+                <div class="labelClass">
+                    <asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
+                    <asp:TextBox ID="name" runat="server"></asp:TextBox>
+                </div>
 
-       </p>
-        <p>
-            
-            <asp:TextBox ID="name" runat="server" Text=""></asp:TextBox>
-        </p>
-        <p>
-                   <asp:Label ID="Label3" runat="server" Text="Username:"></asp:Label>
+                <div class="labelClass">
+                    <asp:Label ID="Label3" runat="server" Text="Username"></asp:Label>
+                    <asp:TextBox ID="username" runat="server"></asp:TextBox>
+                </div>
 
-       </p>
-        <p>
-            <asp:TextBox ID="username" runat="server" Text=""></asp:TextBox>
-        </p>
-        <p>
-                   <asp:Label ID="Label4" runat="server" Text="Password:"></asp:Label>
-
-       </p>
-        <p>
-        <asp:TextBox ID="password" TextMode="Password" runat="server" Text=""></asp:TextBox>
-        </p>
-        <asp:Button ID="Button1" runat="server" Text="register" OnClick="register" />
-    </form>
-</body>
+                <div class="labelClass">
+                    <asp:Label ID="Label4" runat="server" Text="Password"></asp:Label>
+                    <asp:TextBox ID="password" TextMode="Password" runat="server"></asp:TextBox>
+                </div>
+                <asp:Button CssClass="btn" ID="Button1" runat="server" Text="Register" OnClick="register" />
+            </div>
+        </form>
+    </body>
 </html>
+

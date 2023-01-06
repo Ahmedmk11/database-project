@@ -20,7 +20,7 @@ namespace Milestone3
 
         protected void logOut(object sender, EventArgs e)
         {
-            Response.Redirect("start.aspx");
+            Response.Redirect("loginPage.aspx");
         }
 
         protected void stadiumInfo(object sender, EventArgs e)
@@ -33,9 +33,9 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl t1 = new HtmlGenericControl("div");
-            HtmlGenericControl t2 = new HtmlGenericControl("div");
-            HtmlGenericControl t3 = new HtmlGenericControl("div");
+            HtmlGenericControl t1 = new HtmlGenericControl("span");
+            HtmlGenericControl t2 = new HtmlGenericControl("span");
+            HtmlGenericControl t3 = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
@@ -50,7 +50,7 @@ namespace Milestone3
 
             rowsContainer.Controls.Add(titlesRow);
 
-            String sci = "SELECT name, location, capacity FROM stadium WHERE 'x'".Replace("x", Session["sm"].ToString());
+            String sci = "SELECT name, location, capacity FROM stadium WHERE name='x'".Replace("x", Session["sm"].ToString());
 
             SqlCommand si = new SqlCommand(sci, conn);
             si.CommandType = CommandType.Text;
@@ -63,7 +63,7 @@ namespace Milestone3
 
                 String name = rdr.GetString(rdr.GetOrdinal("name"));
                 String location = rdr.GetString(rdr.GetOrdinal("location"));
-                String cap = rdr.GetString(rdr.GetOrdinal("capacity"));
+                String cap = rdr.GetInt32(rdr.GetOrdinal("capacity")).ToString();
 
                 HtmlGenericControl n = new HtmlGenericControl("div");
                 HtmlGenericControl l = new HtmlGenericControl("div");
@@ -96,26 +96,28 @@ namespace Milestone3
 
             HtmlGenericControl titlesRow = new HtmlGenericControl("div");
 
-            HtmlGenericControl hostSpan = new HtmlGenericControl("div");
-            HtmlGenericControl guestSpan = new HtmlGenericControl("div");
-            HtmlGenericControl startTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl endTimeSpan = new HtmlGenericControl("div");
-            HtmlGenericControl stadNameSpan = new HtmlGenericControl("div");
+            HtmlGenericControl repSpan = new HtmlGenericControl("span");
+            HtmlGenericControl hostSpan = new HtmlGenericControl("span");
+            HtmlGenericControl guestSpan = new HtmlGenericControl("span");
+            HtmlGenericControl startTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl endTimeSpan = new HtmlGenericControl("span");
+            HtmlGenericControl statusSpan = new HtmlGenericControl("span");
 
             HtmlGenericControl rowsContainer = new HtmlGenericControl("div");
 
-
+            repSpan.InnerText = "Club Rep";
             hostSpan.InnerText = "Host";
             guestSpan.InnerText = "Guest";
             startTimeSpan.InnerText = "Start Time";
             endTimeSpan.InnerText = "End Time";
-            stadNameSpan.InnerText = "Stadium Name";
+            statusSpan.InnerText = "Status";
 
+            titlesRow.Controls.Add(repSpan);
             titlesRow.Controls.Add(hostSpan);
             titlesRow.Controls.Add(guestSpan);
             titlesRow.Controls.Add(startTimeSpan);
             titlesRow.Controls.Add(endTimeSpan);
-            titlesRow.Controls.Add(stadNameSpan);
+            titlesRow.Controls.Add(statusSpan);
 
             rowsContainer.Controls.Add(titlesRow);
 
@@ -126,15 +128,6 @@ namespace Milestone3
             SqlDataReader rdr = rr.ExecuteReader();
             while (rdr.Read())
             {
-                //DateTime starttime = rdr.GetString(rdr.GetOrdinal(3));
-                //DateTime starttime = rdr.GetDateTime(3);
-
-
-                //DateTime endtime = rdr.GetString(rdr.GetOrdinal(4));
-                //DateTime endtime = rdr.GetDateTime(4);
-
-                
-
                 HtmlGenericControl tmp = new HtmlGenericControl("div");
 
                 String rep = rdr.GetString(rdr.GetOrdinal("clubRep"));
@@ -191,17 +184,28 @@ namespace Milestone3
             String guest_name = guest.Text;
             String start = starttime.Text;
 
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            SqlCommand accR = new SqlCommand("acceptRequest", conn);
-            accR.CommandType = CommandType.StoredProcedure;
-            accR.Parameters.Add(new SqlParameter("@stadium_manager_username", sm_us));
-            accR.Parameters.Add(new SqlParameter("@hosting_club_name", host_name));
-            accR.Parameters.Add(new SqlParameter("@competing_club_name", guest_name));
-            accR.Parameters.Add(new SqlParameter("@start_time", start));
+            if (host_name == "" || guest_name== "" || start=="")
+            {
+                are.Controls.Add(lbl1);
+            }
+            else
+            {
 
 
+                SqlCommand accR = new SqlCommand("acceptRequest", conn);
+                accR.CommandType = CommandType.StoredProcedure;
+                accR.Parameters.Add(new SqlParameter("@stadium_manager_username", sm_us));
+                accR.Parameters.Add(new SqlParameter("@hosting_club_name", host_name));
+                accR.Parameters.Add(new SqlParameter("@competing_club_name", guest_name));
+                accR.Parameters.Add(new SqlParameter("@start_time", start));
 
-            accR.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(are);
+
+                accR.ExecuteNonQuery();
+            }
             conn.Close();
         }
 
@@ -219,17 +223,28 @@ namespace Milestone3
             String guest_name = guest.Text;
             String start = starttime.Text;
 
+            HtmlGenericControl lbl1 = new HtmlGenericControl("div");
+            lbl1.InnerText = "Please enter valid data.";
 
-            SqlCommand rejR = new SqlCommand("rejectRequest", conn);
-            rejR.CommandType = CommandType.StoredProcedure;
-            rejR.Parameters.Add(new SqlParameter("@stadium_manager_username", sm_us));
-            rejR.Parameters.Add(new SqlParameter("@hosting_club_name", host_name));
-            rejR.Parameters.Add(new SqlParameter("@competing_club_name", guest_name));
-            rejR.Parameters.Add(new SqlParameter("@start_time", start));
+            if (host_name == "" || guest_name == "" || start == "")
+            {
+                are.Controls.Add(lbl1);
+            }
+            else
+            {
 
 
+                SqlCommand rejR = new SqlCommand("rejectRequest", conn);
+                rejR.CommandType = CommandType.StoredProcedure;
+                rejR.Parameters.Add(new SqlParameter("@stadium_manager_username", sm_us));
+                rejR.Parameters.Add(new SqlParameter("@hosting_club_name", host_name));
+                rejR.Parameters.Add(new SqlParameter("@competing_club_name", guest_name));
+                rejR.Parameters.Add(new SqlParameter("@start_time", start));
 
-            rejR.ExecuteNonQuery();
+                loginPage.EmptyTextBoxes(are);
+
+                rejR.ExecuteNonQuery();
+            }
             conn.Close();
         }
     }

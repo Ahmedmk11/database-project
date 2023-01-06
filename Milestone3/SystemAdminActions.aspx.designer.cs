@@ -33,6 +33,15 @@ namespace Milestone3
         protected global::System.Web.UI.WebControls.Button logoutSAA;
 
         /// <summary>
+        /// g1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl g1;
+
+        /// <summary>
         /// nameClub control.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,15 @@ namespace Milestone3
         protected global::System.Web.UI.WebControls.TextBox locClub;
 
         /// <summary>
+        /// g2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl g2;
+
+        /// <summary>
         /// nameClubDelete control.
         /// </summary>
         /// <remarks>
@@ -58,6 +76,15 @@ namespace Milestone3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox nameClubDelete;
+
+        /// <summary>
+        /// g3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl g3;
 
         /// <summary>
         /// stadiumNameAdd control.
@@ -87,6 +114,15 @@ namespace Milestone3
         protected global::System.Web.UI.WebControls.TextBox stadiumCapAdd;
 
         /// <summary>
+        /// g4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl g4;
+
+        /// <summary>
         /// stadiumNameDelete control.
         /// </summary>
         /// <remarks>
@@ -94,6 +130,15 @@ namespace Milestone3
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox stadiumNameDelete;
+
+        /// <summary>
+        /// g5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl g5;
 
         /// <summary>
         /// blockFanNat control.
